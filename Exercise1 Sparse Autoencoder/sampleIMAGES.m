@@ -30,7 +30,7 @@ height = 512;
 width = 512;
 
 %indices of randomly picked images 
-img_ind = unidrnd(10, [1, numpatches]); 
+img_ind = unidrnd(10, [1, numpatches]); %Create a set of random Numbers
 
 %row and column indices of randomly picked images
 row_ind = unidrnd(height - patchsize + 1, [1, numpatches]);
