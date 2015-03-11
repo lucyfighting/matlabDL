@@ -33,8 +33,8 @@ width = 512;
 img_ind = unidrnd(10, [1, numpatches]); %Create a set of random Numbers
 
 %row and column indices of randomly picked images
-row_ind = unidrnd(height - patchsize + 1, [1, numpatches]);
-col_ind = unidrnd(width - patchsize + 1, [1, numpatches]);
+row_ind = unidrnd(height - patchsize + 1, [1, numpatches]);%the row has 512-7=505 samples
+col_ind = unidrnd(width - patchsize + 1, [1, numpatches]);% the column has 512-7=505 samples 
 
 %length of unrolled patches
 patch_len = patchsize * patchsize;
