@@ -79,28 +79,28 @@ sp = sparsityParam;
 for i = 1 : m
     delta3 = -(y(:,i) - a3(:,i)) .* sigmoidGrad(z3(:,i));
     delta2 = ( W2' * delta3 + beta * (-sp ./ rho + (1-sparsityParam) ./ (1-rho) ) ) ...
-        .* sigmoidGrad(z2(:,i));
+        .* sigmoidGrad(z2(:,i));%the book p14
     
-    JW1grad = delta2 * a1(:,i)';
+    JW1grad = delta2 * a1(:,i)';% book page9
     Jb1grad = delta2;
     JW2grad = delta3 * a2(:,i)';
     Jb2grad = delta3;
 
-    deltaW1 = deltaW1 + JW1grad;
+    deltaW1 = deltaW1 + JW1grad;%book page10
     deltab1 = deltab1 + Jb1grad;
     deltaW2 = deltaW2 + JW2grad;
     deltab2 = deltab2 + Jb2grad;
 end
 
 
-W1grad = (1. / m) * deltaW1 + lambda * W1;
+W1grad = (1. / m) * deltaW1 + lambda * W1;%book p10
 b1grad = (1. / m) * deltab1;
 W2grad = (1. / m) * deltaW2 + lambda * W2;
 b2grad = (1. / m) * deltab2;
 
 cost = (1. / m) * sum((1. / 2) * sum((a3 - y).^2)) + ...
     (lambda / 2.) * (sum(sum(W1.^2)) + sum(sum(W2.^2))) + ...
-    beta * sum( sp*log(sp./rho) + (1-sp)*log((1-sp)./(1-rho)) );
+    beta * sum( sp*log(sp./rho) + (1-sp)*log((1-sp)./(1-rho)) );%book p5 and p13
 
 
 function grad = sigmoidGrad(x)
