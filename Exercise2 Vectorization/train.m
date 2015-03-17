@@ -1,4 +1,4 @@
-clc; close all;
+clc; close all;clear all;
 %% CS294A/CS294W Programming Assignment Starter Code
 
 %  Instructions
@@ -14,14 +14,13 @@ clc; close all;
 %% STEP 0: Here we provide the relevant parameters values that will
 %  allow your sparse autoencoder to get good filters; you do not need to 
 %  change the parameters below.
-
-visibleSize = 28*28;   % number of input units 
-hiddenSize = 196;     % number of hidden units 
-sparsityParam = 0.1;   % desired average activation of the hidden units.
+visibleSize = single(28*28);   % number of input units 
+hiddenSize = single(196);     % number of hidden units 
+sparsityParam = single(0.1);   % desired average activation of the hidden units.
                      % (This was denoted by the Greek alphabet rho, which looks like a lower-case "p",
 		     %  in the lecture notes). 
-lambda = 3e-3;     % weight decay parameter       
-beta = 3;            % weight of sparsity penalty term       
+lambda = single(3e-3);     % weight decay parameter       
+beta =single( 3);            % weight of sparsity penalty term       
 
 %%======================================================================
 %% STEP 1: Implement sampleIMAGES
@@ -29,8 +28,8 @@ beta = 3;            % weight of sparsity penalty term
 %  After implementing sampleIMAGES, the display_network command should
 %  display a random sample of 200 patches from the dataset
 
-images = loadMNISTImages('train-images-idx3-ubyte');
-labels = loadMNISTLabels('train-labels-idx1-ubyte');%测试，待改回来
+images = single(loadMNISTImages('train-images.idx3-ubyte'));
+labels = single(loadMNISTLabels('train-labels.idx1-ubyte'));%测试，待改回来
 display_network(images(:, 1:100));
 disp(labels(1:10));
 patches = images(:, 1:10000);
@@ -118,7 +117,7 @@ options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
                           % need a function pointer with two outputs: the
                           % function value and the gradient. In our problem,
                           % sparseAutoencoderCost.m satisfies this.
-options.maxIter = 400;	  % Maximum number of iterations of L-BFGS to run 
+options.maxIter = single(400);	  % Maximum number of iterations of L-BFGS to run 
 options.display = 'on';
 
 

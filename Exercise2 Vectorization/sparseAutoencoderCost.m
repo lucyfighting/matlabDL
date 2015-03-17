@@ -20,11 +20,11 @@ b2 = theta(2*hiddenSize*visibleSize+hiddenSize+1:end);
 
 % Cost and gradient variables (your code needs to compute these values). 
 % Here, we initialize them to zeros. 
-cost = 0;
-W1grad = zeros(size(W1)); 
-W2grad = zeros(size(W2));
-b1grad = zeros(size(b1)); 
-b2grad = zeros(size(b2));
+cost = single(0);
+W1grad = zeros(size(W1),'single'); 
+W2grad = zeros(size(W2),'single');
+b1grad = zeros(size(b1),'single'); 
+b2grad = zeros(size(b2),'single');
 
 %% ---------- YOUR CODE HERE --------------------------------------
 %  Instructions: Compute the cost/optimization objective J_sparse(W,b) for the Sparse Autoencoder,
@@ -41,27 +41,27 @@ b2grad = zeros(size(b2));
 % Stated differently, if we were using batch gradient descent to optimize the parameters,
 % the gradient descent update to W1 would be W1 := W1 - alpha * W1grad, and similarly for W2, b1, b2. 
 % 
-[ndims, m] = size(data);
+[ndims, m] =size(data);
 
-z2 = zeros(hiddenSize, m);
-z3 = zeros(visibleSize, m);
-a1 = zeros(ndims, m);
-a2 = zeros(size(z2));
-a3 = zeros(size(z3));
+z2 = zeros(hiddenSize, m,'single');
+z3 = zeros(visibleSize, m,'single');
+a1 = zeros(ndims, m,'single');
+a2 = zeros(size(z2),'single');
+a3 = zeros(size(z3),'single');
 
 %autoencode use inputs as target values
-y  = zeros(ndims, m);
+y  = zeros(ndims, m,'single');
 
 a1 = data;
 y = data;
 
 
-deltaW1 = zeros(size(W1));
-deltab1 = zeros(size(b1));
+deltaW1 = zeros(size(W1),'single');
+deltab1 = zeros(size(b1),'single');
 
 
-deltaW2 = zeros(size(W2));
-deltab2 = zeros(size(b2));
+deltaW2 = zeros(size(W2),'single');
+deltab2 = zeros(size(b2),'single');
 
 
 z2 = W1 * data + repmat(b1,1,m);
@@ -71,7 +71,7 @@ a3 = sigmoid(z3);
 
 
 
-rho = zeros(hiddenSize, 1);
+rho = zeros(hiddenSize, 1,'single');
 rho = (1. / m) * sum(a2, 2);
 sp = sparsityParam;
 sparsity_delta = -sp ./ rho + (1-sp) ./ (1-rho);
