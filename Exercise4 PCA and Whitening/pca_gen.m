@@ -101,7 +101,7 @@ display_network(x(:,randsel));
 
 % -------------------- YOUR CODE HERE -------------------- 
 
-epsilon = 0.1;
+epsilon = 1;
 xPCAWhite = zeros(size(x));
 xPCAWhite = diag(1./sqrt(diag(s)+epsilon)) * u' * x;
 %%================================================================
@@ -120,7 +120,7 @@ xPCAWhite = diag(1./sqrt(diag(s)+epsilon)) * u' * x;
 %  blue across the diagonal, corresponding to the one entries slowly
 %  becoming smaller.
 
-% 正则化后协方差越来越小？？
+
 
 % -------------------- YOUR CODE HERE -------------------- 
 covar = xPCAWhite * xPCAWhite' / size(xPCAWhite, 2);
@@ -128,6 +128,14 @@ covar = xPCAWhite * xPCAWhite' / size(xPCAWhite, 2);
 % diagonal against a blue background.
 figure('name','Visualisation of covariance matrix');
 imagesc(covar);
+
+xPCAWhite2 = zeros(size(x));
+xPCAWhite2 = diag(1./sqrt(diag(s))) * u' * x;
+covar2 = xPCAWhite2 * xPCAWhite2' / size(xPCAWhite2, 2);
+figure('name','Visualisation of covariance matrix 2');
+imagesc(covar2);
+
+
 
 %%================================================================
 %% Step 5: Implement ZCA whitening
@@ -145,3 +153,5 @@ figure('name','ZCA whitened images');
 display_network(xZCAWhite(:,randsel));
 figure('name','Raw images');
 display_network(x(:,randsel));
+figure('name','PCA whitened images');
+display_network(xPCAWhite(:,randsel));
