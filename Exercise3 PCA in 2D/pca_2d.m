@@ -9,7 +9,7 @@ close all
 
 x = load('pcaData.txt','-ascii');
 figure(1);
-scatter(x(1, :), x(2, :));
+scatter(x(1, :), x(2, :));% plot points picture(scatter diagram …¢µ„Õº)
 title('Raw data');
 
 
